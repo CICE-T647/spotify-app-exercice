@@ -55,6 +55,7 @@ hbs.registerPartials(__dirname + '/views/partials');
 //importamos las rutas requeridas
 app.use("/", require("./routes/index.js"));
 app.use("/auth", require("./routes/auth/index.js"));
+app.use("/spotify", require("./routes/spotify/index.js"));
 
 //gestionamos las rutas no configuradas
 app.use((request, response) => {

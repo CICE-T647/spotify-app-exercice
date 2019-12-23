@@ -23,10 +23,12 @@ router.get("/view", (request, response) => {
     
         request.session.currentUser = user;
         
-        const respuesta = require("../../spotify-token/getToken.js");
-        response.status(200).json({ message: respuesta });
-        //console.log(require("../../spotify-token/getToken.js"));
+        const getToken = require("../../spotify-token/getToken.js");
+        const token = await getToken();
 
+        request.session.token = token;
+        
+        response.status(200).json({ message: token });
         //redireccionamos aca
         
     } catch (error) {
@@ -34,5 +36,6 @@ router.get("/view", (request, response) => {
       response.status(500).json({ message: "Hubo un problema" });
     }
   });
+  
 
 module.exports = router;
