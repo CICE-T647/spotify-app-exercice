@@ -18,8 +18,10 @@ router.get("/view", (request, response) => {
     
       const passwordDB = user.password;
   
-      if (!bcrypt.compareSync(password, passwordDB))
-        return request.render("login", { error: "La contraseña no es correcta" });
+      const checkpw =  await bcrypt.compareSync(password, passwordDB); 
+
+      if (!checkpw)
+        return response.render("login", { error: "La contraseña no es correcta" });
     
         request.session.currentUser = user;
         
@@ -28,7 +30,7 @@ router.get("/view", (request, response) => {
 
         request.session.token = token;
         
-        response.status(200).json({ message: token });
+        response.redirect("../../spotify/releases/");
         //redireccionamos aca
         
     } catch (error) {

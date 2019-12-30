@@ -1,0 +1,40 @@
+<div class="card mb-3 mt-2">
+  <img class="card-img-top image-album" src="{{album.images.[1].url}}">
+  <div class="card-body">
+    <h5 class="card-title">Album:{{album.name}}</h5>
+    <p class="card-text">
+        Artists:{{#each album.artists}}
+            {{this.name}}.<br>
+        {{/each}}
+    </p>
+    <p class="card-text"><small class="text-muted">
+        {{release_date}}
+    </small></p>
+  </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Track name</th>
+            <th scope="col">Preview</th>
+        </tr>
+    </thead>
+    <tbody>
+    {{#each album.tracks.items}}
+        <tr>
+        <th scope="row">{{this.track_number}}</th>
+        <td>{{this.name}}</td>
+        <td> 
+            {{#if this.preview_url}}
+                <audio controls>
+                <source src="{{this.preview_url}}" type="audio/mpeg">
+                </audio>
+            {{else}}
+                Audio no available.
+            {{/if}}
+        </td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>

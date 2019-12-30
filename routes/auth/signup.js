@@ -40,7 +40,7 @@ router.post("/create",async (request, response) => {
 
   const salt = bcrypt.genSaltSync(saltRounds);
 
-  const hashPass =  bcrypt.hashSync(userForm.password, salt);
+  const hashPass = await bcrypt.hashSync(userForm.password, salt);
 
   const userBD = new User({
     name: userForm.name,
@@ -52,12 +52,22 @@ router.post("/create",async (request, response) => {
 
   try {
     await userBD.save();
-
     response.redirect("../login/view");
 
   } catch (error) {
-    console.log(error);
-    response.status(500).json({ message: "Hubo un problema" });
+    let errors = error.message;
+    let arrayErrors = errors.split(',');
+
+    let formattedErrors = arrayErrors.map( function(x) {
+
+      if(x.includes('failed')){
+        let y = x.replace('User validation failed:','');
+        return y.trim();
+      }
+      else return  x.trim();
+   });
+
+    response.render("signup", { errors: arrayErrors });
   }
 
 });
