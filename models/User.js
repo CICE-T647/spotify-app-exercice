@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 var uniqueValidator = require("mongoose-unique-validator");
 
+var validateEmail = function(email) {
+  var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  return re.test(email)
+};
+
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -15,7 +20,9 @@ const userSchema = new Schema({
   email: {
     type: String,
     required: [true, "Email is a required field."],
-    unique: [true, "Email is already in use."]
+    unique: [true, "Email is already in use."],
+    validate: [validateEmail, 'Please fill a valid email address']
+    //match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
   },
   username: {
     type: String,
@@ -23,7 +30,7 @@ const userSchema = new Schema({
     unique: [true, "Username is already in use."]
   },
   password: {
-    type: Object,
+    type: String,
     required: [true, "Password is required."]
   }
 }, { 
@@ -31,6 +38,6 @@ const userSchema = new Schema({
     createdAt: true 
     });
 
-userSchema.plugin(uniqueValidator, { message: "{PATH} debe ser único " });
+userSchema.plugin(uniqueValidator, { message: "{PATH} must be unique. " });
 
 module.exports = mongoose.model("User", userSchema);

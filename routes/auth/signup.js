@@ -40,6 +40,9 @@ router.post("/create",async (request, response) => {
 
   const salt = bcrypt.genSaltSync(saltRounds);
 
+  if(userForm.password.length <6)
+    var pswErrorItem = ['password','Password length must be at least 6 characters.'];
+
   const hashPass = await bcrypt.hashSync(userForm.password, salt);
 
   const userBD = new User({
@@ -56,8 +59,10 @@ router.post("/create",async (request, response) => {
 
   } catch (error) {
     let errors = error.message;
+    //separamos los errores
     let arrayErrors = errors.split(',');
 
+    //Removemos el primer mensaje de advertencia 
     let formattedErrors = arrayErrors.map( function(x) {
 
       if(x.includes('failed')){
@@ -67,7 +72,17 @@ router.post("/create",async (request, response) => {
       else return  x.trim();
    });
 
-    response.render("signup", { errors: arrayErrors });
+   //organizamos los errores en una combinación llave valor
+   
+   let errorsOnView = formattedErrors.map( function(x) {
+      let item = x.split(':');
+      return item;
+   });
+   
+    if(pswErrorItem)
+      errorsOnView.push(pswErrorItem);
+
+    response.render("signup", { errors: errorsOnView });
   }
 
 });
