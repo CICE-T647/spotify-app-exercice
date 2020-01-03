@@ -6,10 +6,10 @@ const token = require("../../spotify-token/getToken")
 
 router.get("/", async (req, res) => {
   try{
-    const url = "https://api.spotify.com/v1/browse/new-releases"; 
+    const url = "https://api.spotify.com/v1/browse/new-releases?country=ES"; 
     const response = await axios.get(url, {
       headers: {
-          'Authorization' : `Bearer ${token}`,
+          Authorization : `Bearer ${token()}`,
           "Content-Type" : "aplication/json"
       }
   });
