@@ -35,6 +35,7 @@ app.use(bodyParser.json());
 app.use("/", require("./routes"));
 app.use("/home", require("./routes/home"));
 app.use("/auth", require("./routes/auth"));
+app.use("/album", require("./routes/album"));
 
 mongoose
   .connect(`mongodb://localhost:${DB_PORT}/app`, {
