@@ -1,1 +1,16 @@
-<h1>Hola {{user.name}}</h1>
+<h1>Albums</h1>
+<ul>
+    {{#each albums}}
+        <li>
+            <img alt={{this.name}} src={{this.images.0.url}} />
+            <p><strong>Álbum:</strong> {{this.name}}</p>
+            <p><strong>Artistas:</strong> 
+                {{#each artists}}
+                    {{this.name}}
+                {{/each}}
+            </p>
+            <p><a href=/album/{{this.id}} class="btn btn-primary">Ver más</a></p>
+            
+        </li>
+    {{/each}}
+</ul>
