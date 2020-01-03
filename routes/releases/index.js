@@ -5,6 +5,7 @@ const axios = require("axios")
 const getTokenSpotify = require("../../spotify-token/getToken")
 
 router.get("/", async (req, res) => {
+  const user = req.session.currentUser 
   try{
     const url = "https://api.spotify.com/v1/browse/new-releases?country=ES"; 
     const token = await getTokenSpotify();
@@ -16,7 +17,7 @@ router.get("/", async (req, res) => {
       }
     });
     // console.log(response.data.albums.items)
-    res.render("home", {albums: response.data.albums.items});
+    res.render("home", {albums: response.data.albums.items, user:user});
   }catch(error){
     res.status(500).json({ message: error });
     console.log(error);

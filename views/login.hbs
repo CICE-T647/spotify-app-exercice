@@ -1,8 +1,15 @@
-<form action="/auth/login" method="post"/>
-    <input type="mail" name="email" placeholder="name"/>
-    <input type="password" name="password" placeholder="password"/>
-    <input type="submit" value="enviar"/>
-    {{#if error}}
-        <p>{{error}}</p>
+{{#if user}}
+<h1>{{user.name}} estás logueado, puedes desloguearte si quieres <a href="/auth/logout" title="deslogarse">aquí</a></h1>
+{{else}}
+    {{#if message}}
+        <p>{{message}}</p>
     {{/if}}
-</form>
+    <form action="/auth/login" method="post"/>
+        <input type="mail" name="email" placeholder="name"/>
+        <input type="password" name="password" placeholder="password"/>
+        <input type="submit" value="enviar"/>
+        {{#if error}}
+            <p>{{error}}</p>
+        {{/if}}
+    </form>
+{{/if}}

@@ -33,9 +33,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use("/", require("./routes"));
-app.use("/home", require("./routes/home"));
+app.use("/releases", require("./routes/releases"));
 app.use("/auth", require("./routes/auth"));
 app.use("/album", require("./routes/album"));
+app.use("/404", require("./routes/404.js"));
 
 mongoose
   .connect(`mongodb://localhost:${DB_PORT}/app`, {
@@ -47,7 +48,7 @@ mongoose
     throw err;
   });
 
-app.use((req, res) => res.status(404).json({ message: "route not found" }));
+app.use((req, res) => res.redirect("404")); 
 
 app.listen(SERVER_PORT, () => {
   console.log(`Server listening on port ${SERVER_PORT} `);
