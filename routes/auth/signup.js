@@ -3,10 +3,11 @@ const Express = require("express");
 const bcrypt = require("bcryptjs")
 const router = Express.Router();
 const User = require("../../models/User");
+const isLoggedIn = require("../../middlewares/isLoggedIn")
+
 
 router.get("/", (req,res)=>{
-    const user = req.session.currentUser 
-    res.render("signup", {user}); 
+    res.render("signup")
 })
 
 router.post("/", async (req, res) => {
@@ -43,7 +44,7 @@ router.post("/", async (req, res) => {
 
     try{
         await user.save();
-        req.session.currentUser = user
+        res.redirect("/", user)
         res.redirect("/"); 
 
     } catch(error){

@@ -16,6 +16,9 @@
     "mongo-session": "^0.2.15",
     "mongoose": "^5.8.0",
     "mongoose-unique-validator": "^2.0.3",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
     "request": "^2.88.0"
   },
   "devDependencies": {},
