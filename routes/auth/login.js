@@ -13,15 +13,17 @@ router.get("/", (req,res)=>{
 router.post("/", (req, res) => {
     // procedemos a autenticar la estrategia local 
     passport.authenticate("local", { session: false }, (error, user, info) => {
-      if (error) res.render("login", { error: error.message });
-      if (info) res.render("login", { error: info.message });
+      console.log("error:"+ error + "info" + info)
+      if (error) return res.render("login", { error: error.message });
+      if (info) return res.render("login", { error: info.message });
+
     const payload = {
         sub: user._id,
         exp: Date.now() + parseInt(process.env.JWT_EXPIRES),
         username: user.username
       };
       const token = jwt.sign(JSON.stringify(payload), process.env.JWT_SECRET );
-      res.redirect("/").json({data:token}); 
+      return res.status(200).json({ data: { token } });
     })(req, res);
   });
   

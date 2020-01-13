@@ -44,8 +44,7 @@ router.post("/", async (req, res) => {
 
     try{
         await user.save();
-        res.redirect("/", user)
-        res.redirect("/"); 
+        res.redirect("/")
 
     } catch(error){
         console.log(error)

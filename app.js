@@ -42,15 +42,14 @@ app.use(passport.initialize());
         console.log(`Estrategia local. Información recibida: email ${email}, password ${password}`)
         try {
           const user = await User.findOne({ email });
-    
-         if (!user) next(null, false, { message: "El usuario no existe" });
+          console.log(user)
+         if (!user) return next(null, false, { message: "El usuario no existe" });
     
           if (!bcrypt.compareSync(password, user.password))
-            next(null, false, { message: "la contraseña no es correcta" });
-    
+            return next(null, false, { message: "la contraseña no es correcta" });
           next(null, user);
         } catch (error) {
-    
+          console.log(error)
           next(error);
         }
       })
@@ -62,6 +61,7 @@ const opts = {
   secretOrKey: process.env.JWT_SECRET
 };
 
+console.log(opts)
 
 passport.use(
   new JwtStrategy(opts, async (tokenPayload, next) => {
@@ -69,9 +69,11 @@ passport.use(
 
     try {
       const user = await User.findOne({ _id: tokenPayload.sub });
+      console.log(user)
       if (!user) next(null, false, { message: "invalid token" });
       next(null, user);
     } catch (error) {
+      console.log(error)
       next(error);
     }
   })

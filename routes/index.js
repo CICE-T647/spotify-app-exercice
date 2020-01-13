@@ -3,11 +3,9 @@ const router = express.Router();
 const isLoggedIn = require("../middlewares/isLoggedIn")
 
 
-router.get("/", isAutenticated, (req, res) => {
+router.get("/", isLoggedIn, (req, res) => {
   res.render("index"); 
 });
-
-
 
 
 module.exports = router;
