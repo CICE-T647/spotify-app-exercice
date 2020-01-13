@@ -1,0 +1,23 @@
+{
+  "name": "spotify-app-exercice",
+  "version": "1.0.0",
+  "description": "En esta práctica, el objetivo será crear una pequeña app de música, tanto en la parte de front como back.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/villarjimenez00/spotify-app-exercice.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/villarjimenez00/spotify-app-exercice/issues"
+  },
+  "homepage": "https://github.com/villarjimenez00/spotify-app-exercice#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "hbs": "^4.0.6"
+  }
+}
