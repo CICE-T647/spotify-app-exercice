@@ -38,6 +38,7 @@ app.use(bodyParser.json());
 app.use("/", require("./routes/index.js"))
 app.use("/auth", require("./routes/auth"));
 app.use("/home", require("./routes/auth"));
+app.use("/albums", require("./routes/albums"));
 
 
 mongoose

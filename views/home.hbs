@@ -1,3 +1,9 @@
 Usuario: {{usuario.name}}
 <br>
 Email: {{usuario.email}}
+
+<br>
+album: 
+{{#each respuesta.data.albums.items}}
+    <li><b>{{this.name}}</b><a href="/albums/details/{{this.id}}" class="btn btn-primary">Ver detalles</a></li><br>
+{{/each}}

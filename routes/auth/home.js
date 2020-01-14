@@ -18,13 +18,14 @@ router.get("/", isLoggedIn, async (req, res) => {
 try {
 
     const respuesta =  await axios.get(url, {headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' }});
+    console.log(respuesta.data.albums.items)
+    res.render("home", {usuario: usuario, respuesta: respuesta});
 
 } catch(err) {
     console.log("error es: ", err)
 }
-     
-   
-    res.render("home", {usuario: usuario});
+
+
 });
 
 module.exports = router;
