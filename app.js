@@ -62,12 +62,9 @@ const opts = {
   secretOrKey: process.env.JWT_SECRET
 };
 
-console.log(opts)
-
 passport.use(
   new JwtStrategy(opts, async (tokenPayload, next) => {
     console.log(`Estrategia jwt. Información recibida: token ${tokenPayload}`)
-
     try {
       const user = await User.findOne({ _id: tokenPayload.sub });
       console.log(user)
