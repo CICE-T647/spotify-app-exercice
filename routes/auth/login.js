@@ -9,7 +9,7 @@ const isLoggedIn = require("../../middlewares/isLoggedIn")
 
 
 router.get("/", isLoggedIn, (req,res)=>{
-    const user = req.user
+  const user = req.user
     res.render("login", {user}); 
 })
 router.post("/", (req, res) => {

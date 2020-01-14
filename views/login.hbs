@@ -4,10 +4,10 @@
     {{#if message}}
         <p>{{message}}</p>
     {{/if}}
-    <form action="/auth/login" method="post"/>
+    <form id="login_form">
         <input type="mail" name="email" placeholder="email"/>
         <input type="password" name="password" placeholder="password"/>
-        <input type="submit" value="enviar"/>
+        <input id="login" type="submit" value="enviar"/>
         {{#if error}}
             <p>{{error}}</p>
         {{/if}}
