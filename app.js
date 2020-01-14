@@ -29,7 +29,8 @@ const bcrypt = require("bcryptjs");
 
 //Iniciamos Passport
 app.use(passport.initialize());
-
+//Iniciamos flash
+// app.use(require('flash')());
 
 // 2. DEFINIMOS LA ESTRATEGIA LOCAL. 
 

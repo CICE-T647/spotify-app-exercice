@@ -5,10 +5,12 @@ const router = Express.Router();
 const User = require("../../models/User");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
+const isLoggedIn = require("../../middlewares/isLoggedIn")
 
-router.get("/", (req,res)=>{
-    // const user = req.session.currentUser 
-    res.render("login"); 
+
+router.get("/", isLoggedIn, (req,res)=>{
+    const user = req.user
+    res.render("login", {user}); 
 })
 router.post("/", (req, res) => {
     // procedemos a autenticar la estrategia local 

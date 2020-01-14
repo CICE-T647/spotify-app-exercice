@@ -4,7 +4,8 @@ const isLoggedIn = require("../middlewares/isLoggedIn")
 
 
 router.get("/", isLoggedIn, (req, res) => {
-  res.render("index"); 
+  const user = req.user
+  res.render("index", {user}); 
 });
 
 

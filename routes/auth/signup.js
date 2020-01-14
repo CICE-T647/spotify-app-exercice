@@ -6,8 +6,9 @@ const User = require("../../models/User");
 const isLoggedIn = require("../../middlewares/isLoggedIn")
 
 
-router.get("/", (req,res)=>{
-    res.render("signup")
+router.get("/", isLoggedIn, (req,res)=>{
+    user = req.user; 
+    res.render("signup", {user})
 })
 
 router.post("/", async (req, res) => {
