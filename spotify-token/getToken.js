@@ -29,7 +29,7 @@ return new Promise((resolve, reject)=>{
                 err
             })
         }
-        console.log(Buffer(client_id + ':' + client_secret).toString('base64'));
+        //console.log(Buffer(client_id + ':' + client_secret).toString('base64'));
         resolve(body.access_token)
 
     })

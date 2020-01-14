@@ -26,15 +26,17 @@ router.get("/view", (request, response) => {
         request.session.currentUser = user;
         
         const getToken = require("../../spotify-token/getToken.js");
-        const token = await getToken();
 
+        const token = await getToken();
+        
         request.session.token = token;
+       
         
         response.redirect("../../spotify/releases/");
         //redireccionamos aca
         
     } catch (error) {
-      console.log(error);
+      
       response.status(500).json({ message: "Hubo un problema" });
     }
   });

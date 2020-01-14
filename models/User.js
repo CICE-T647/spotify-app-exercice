@@ -32,7 +32,8 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: [true, "Password is required."]
-  }
+  },
+  favorites : [{type: Schema.Types.ObjectId, ref: "Song"}]
 }, { 
     timeStamps: true,
     createdAt: true 

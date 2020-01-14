@@ -15,7 +15,6 @@ router.get("/:id",isLoggedIn ,async (request, response) => {
         const data = await axios.get(`https://api.spotify.com/v1/albums/${id}`,config);
 
         const album = data.data;
-            
         response.render("album", { album: album, loggedIn : request.session.token, username:request.session.currentUser.username });
 
        
@@ -25,5 +24,7 @@ router.get("/:id",isLoggedIn ,async (request, response) => {
         response.redirect('../../auth/logout');
     }
 });
+
+
 
 module.exports = router;
