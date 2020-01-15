@@ -13,7 +13,9 @@ document.getElementById("login_form").addEventListener("submit", function(e){
       }).then(res => res.json())
       .catch(error => console.error('Error:', error))
       .then(response => {
-        window.localStorage.setItem('access_token', response.data.token);
+        localStorage.setItem('access_token', response.data.token);
+        response.render(`/?token=${response.data.token}`)
       });
 })
-
+const token = localStorage.getItem("access_token")
+console.log(token)

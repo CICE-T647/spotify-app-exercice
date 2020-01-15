@@ -58,7 +58,7 @@ app.use(passport.initialize());
 
 // 4. DEFINIMOS LA CONFIGURACIÓN DE LA ESTRATEGIA JWT
 const opts = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  jwtFromRequest: ExtractJwt.fromUrlQueryParameter('token'),
   secretOrKey: process.env.JWT_SECRET
 };
 

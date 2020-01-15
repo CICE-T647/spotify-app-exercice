@@ -1,10 +1,17 @@
+{{#if token}}
+    <script type="text/javascript" async>
+        const token = '{{token}}';
+        localStorage.setItem("auth_token", token)
+        console.log(localStorage.getItem("auth_token"))
+    </script>
+{{/if}}
 {{#if user}}
-<h1>{{user.name}} estás logueado, puedes desloguearte si quieres <a href="/auth/logout" title="deslogarse">aquí</a></h1>
+    <h1>{{user.name}} estás logueado, puedes desloguearte si quieres <a href="/auth/logout" title="deslogarse">aquí</a></h1>
 {{else}}
     {{#if message}}
         <p>{{message}}</p>
     {{/if}}
-    <form id="login_form" method="POST" action="/auth/login">
+    <form id="login_form">
         <input type="mail" name="email" placeholder="email"/>
         <input type="password" name="password" placeholder="password"/>
         <input id="login" type="submit" value="enviar"/>
@@ -12,11 +19,4 @@
             <p>{{error}}</p>
         {{/if}}
     </form>
-{{/if}}
-{{#if token}}
-    <script type="text/javascript" async>
-        const token = '{{token}}';
-        localStorage.setItem("auth_token", token)
-        console.log(localStorage.getItem("auth_token"))
-    </script>
 {{/if}}
