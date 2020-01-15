@@ -1,0 +1,14 @@
+{{#if album}} 
+
+{{album.name}}
+{{album.release_date}}
+
+<ul>
+{{#each album.available_markets}}       
+
+        <h4>{{this}}</h4>      
+
+{{/each}}
+</ul>
+
+{{/if}}
