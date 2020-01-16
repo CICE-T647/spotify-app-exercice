@@ -6,7 +6,7 @@ const User = require("../../models/User");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const isLoggedIn = require("../../middlewares/isLoggedIn")
-
+const hbs = require("hbs")
 
 router.get("/", isLoggedIn, (req,res)=>{
   const user = req.user
@@ -24,6 +24,7 @@ router.post("/", (req, res) => {
       username: user.username
     };
     const token = jwt.sign(JSON.stringify(payload), process.env.JWT_SECRET );
+    hbs.registerHelper('token', token)
     return res.status(200).json({ data:{ token }}); 
   })(req, res);
 });

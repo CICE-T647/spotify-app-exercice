@@ -1,5 +1,3 @@
-// let access_token = localStorage.getItem('access_token')
-// console.log(access_token)
 document.getElementById("login_form").addEventListener("submit", function(e){
     e.preventDefault();
     const email = document.getElementById("login_form").querySelector('input[name="email"]').value;
@@ -14,8 +12,6 @@ document.getElementById("login_form").addEventListener("submit", function(e){
       .catch(error => console.error('Error:', error))
       .then(response => {
         localStorage.setItem('access_token', response.data.token);
-        response.render(`/?token=${response.data.token}`)
+       return window.location.href = `/?token=${response.data.token}`; 
       });
 })
-const token = localStorage.getItem("access_token")
-console.log(token)
