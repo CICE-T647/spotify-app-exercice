@@ -7,6 +7,11 @@ body {
   overflow-x: hidden;
 }
 
+.icon{
+  width: 25px;
+  height: 25px;
+}
+
 .image-album {
   width: 180px;
   height: 180px;

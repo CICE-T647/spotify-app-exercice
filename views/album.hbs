@@ -2,7 +2,7 @@
   <img class="card-img-top image-album" src="{{album.images.[1].url}}">
   <div class="card-body">
     <div class="row justify-content-center">
-        <div class="col-8">
+        <div class="col-10">
             <h5 class="card-title">Album:{{album.name}}</h5>
             <p class="card-text">
                 Artists:{{#each album.artists}}
@@ -15,7 +15,7 @@
             </small>
             </p>
         </div>
-        <div class="col-4">
+        <div class="col-2">
             <a href="/spotify/releases" class="btn btn-primary stretched-link">Back</a>
         </div>
     </div>
@@ -44,7 +44,7 @@
                 Audio no available.
             {{/if}}
         </td>
-        <td> <a href="#" class="save" data-song-id="{{this.id}}" data-song-name="{{this.name}}">{{this.id}}</a></td>
+        <td> <a href="#" class="save" data-song-id="{{this.id}}" data-song-name="{{this.name}}" data-song-url="../song/save"><img src="/img/like.svg" class="icon"></a></td>
         </tr>
     {{/each}}
     </tbody>
@@ -54,21 +54,34 @@
 
     $( document ).ready(function() {
         $( ".save" ).click(function() {
+            let link = $(this);
             let songId = $(this).data("song-id");
             let songName = $(this).data("song-name");
-            let url = '../song/save';
-            console.log(url);
+            let endpoint = $(this).data("song-url");
+        
+            console.log(endpoint);
        
             $.ajax({
                 type: "POST",
-                url: url,
+                url: endpoint,
                 data : {id :songId,
                         name:songName},
                 dataType: "json"
             }).done(function( data ) {
-                console.log(data);
+
+                if(data.result == "fav"){
+                    link.html('<img src="/img/star_12.svg" class="icon">');
+                
+                }
+                else if(data.result == "del"){
+                    link.html('<img src="/img/like.svg" class="icon">');
+                   
+                }else{
+                    alert('Error');
+                }
+                  
             }).fail( function() {
-                console( 'Error!!' );
+                console.log( 'Error!!' );
             });
         });
     });

@@ -7,7 +7,7 @@ const Song = require("../../models/Song.js");
 router.post("/save",isLoggedIn ,async (request, response) => {
     
     const { id, name } = request.body;
-    console.log(request.session.currentUser);
+
     try {
       const song = new Song({
         id,
@@ -15,9 +15,16 @@ router.post("/save",isLoggedIn ,async (request, response) => {
         createdBy: request.session.currentUser._id
       });
 
-      await song.save();
+      let exist = await Song.count({ id: song.id, createdBy: song.createdBy});
+      
+      if (exist > 0){
+          action = await Song.remove({ id: song.id, createdBy: song.createdBy}) ? "del":"error";
+      }
+      else{
+        action = await song.save() ? "fav":"error";
+      }
 
-      response.status(200).json({ song });
+      response.status(200).json({ result: action });
     } catch (error) {
       console.log(error);
       response.status(500).json({ message: "internal server error" });
