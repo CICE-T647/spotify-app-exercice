@@ -1,0 +1,18 @@
+{{#if user}}
+<h1>Álbum: {{data.name}}</h1>
+<ul>
+    {{#each tracks}}
+        <li>
+            <figure>
+                <figcaption>{{this.name}}</figcaption>
+                <audio
+                    controls
+                    src={{this.preview_url}}><
+                </audio>
+            </figure>
+        </li>
+    {{/each}}
+</ul>
+{{else}}
+<p>Tienes que estar logueado para ver esta página</p>
+{{/if}}

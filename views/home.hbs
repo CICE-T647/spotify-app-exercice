@@ -1,0 +1,21 @@
+<h1>Albums</h1>
+<ul>
+    {{#each albums}}
+        <li>
+            <img alt={{this.name}} src=
+            {{#if this.images.0.url}}
+            {{this.images.0.url}}
+            {{else}}
+            "http://petersavizon.com/sites/default/files/default_images/albumart.jpg"
+            {{/if}}
+             />
+            <p><strong>Álbum:</strong> {{this.name}}</p>
+            <p><strong>Artistas:</strong> 
+                {{#each artists}}
+                    {{this.name}}
+                {{/each}}
+            </p>
+            <p><a href='/album/{{this.id}}/?token={{token}}' class="btn btn-primary">Ver más</a></p>
+        </li>
+    {{/each}}
+</ul>

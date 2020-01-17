@@ -1,0 +1,11 @@
+{{#if user}}
+    <h1>Hola {{user.name}}</h1>
+    <p>Puedes ver los nuevos <a href="/releases/?token={{token}}">lanzamientos de spotify.</a></p>
+{{else}}
+    <h1>Logueate o date de alta</h1>
+    <ul>
+        <li><a  class="btn" href="/auth/login">Login</a></li>
+        <li><a  class="btn" href="/auth/signup">Signup</a></li>    
+    </ul>
+    
+{{/if}}
