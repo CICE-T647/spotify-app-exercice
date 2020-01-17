@@ -1,0 +1,26 @@
+
+<div class="row row-cols-3 mt-2">
+    {{#each albums}}
+        {{#each this}}
+        <div class="col-4 mb-4">
+            <div class="card">
+                <img src="{{this.images.[0].url}}" class="card-img-top" alt="{{this.name}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.name}}</h5>
+                    <p class="card-text">
+                        {{#each this.artists}}
+                            <li>{{this.name}}</li>
+                        {{/each}}
+                    </p>
+                    <p class="card-text">
+                        <small class="text-muted">Release date: {{this.release_date}}</small>
+                    </p>
+                </div>
+                <div class="card-footer">
+                <a href="/spotify/album/{{this.id}}" class="btn btn-link btn-lg btn-block" role="button" aria-pressed="true">Ver más</a>
+                </div>
+            </div>
+         </div>   
+        {{/each}}
+    {{/each}}
+</div>

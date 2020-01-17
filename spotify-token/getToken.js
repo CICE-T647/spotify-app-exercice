@@ -5,8 +5,9 @@ let client_secret = process.env.CLIENT_SECRET;
 
 module.exports =  () => {
 return new Promise((resolve, reject)=>{
+    
     let spotifyUrl = 'https://accounts.spotify.com/api/token';
-
+    
     var authOptions = {
         url: spotifyUrl,
         headers: {
@@ -19,15 +20,16 @@ return new Promise((resolve, reject)=>{
     };
 
      request.post(authOptions, (err, httpResponse, body) => {
-
+        
         if (err) {
+            //console.log(Buffer(client_id + ':' + client_secret).toString('base64'));
             reject({
                 ok: false,
                 mensaje: 'No se pudo obtener el token',
                 err
             })
         }
-
+        //console.log(Buffer(client_id + ':' + client_secret).toString('base64'));
         resolve(body.access_token)
 
     })

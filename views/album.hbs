@@ -1,0 +1,90 @@
+<div class="card mb-3 mt-2">
+  <img class="card-img-top image-album" src="{{album.images.[1].url}}">
+  <div class="card-body">
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <h5 class="card-title">Album:{{album.name}}</h5>
+            <p class="card-text">
+                Artists:{{#each album.artists}}
+                    {{this.name}}.<br>
+                {{/each}}
+            </p>
+            <p class="card-text">
+            <small class="text-muted">
+                {{release_date}}
+            </small>
+            </p>
+        </div>
+        <div class="col-2">
+            <a href="/spotify/releases" class="btn btn-primary stretched-link">Back</a>
+        </div>
+    </div>
+  </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Track name</th>
+            <th scope="col">Preview</th>
+            <th scope="col">Like</th>
+        </tr>
+    </thead>
+    <tbody>
+    {{#each album.tracks.items}}
+        <tr>
+        <th scope="row">{{this.track_number}}</th>
+        <td>{{this.name}}</td>
+        <td> 
+            {{#if this.preview_url}}
+                <audio controls>
+                <source src="{{this.preview_url}}" type="audio/mpeg">
+                </audio>
+            {{else}}
+                Audio no available.
+            {{/if}}
+        </td>
+        <td> <a href="#" class="save" data-song-id="{{this.id}}" data-song-name="{{this.name}}" data-song-url="../song/save"><img src="/img/like.svg" class="icon"></a></td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
+
+<script>
+
+    $( document ).ready(function() {
+        $( ".save" ).click(function() {
+            let link = $(this);
+            let songId = $(this).data("song-id");
+            let songName = $(this).data("song-name");
+            let endpoint = $(this).data("song-url");
+        
+            console.log(endpoint);
+       
+            $.ajax({
+                type: "POST",
+                url: endpoint,
+                data : {id :songId,
+                        name:songName},
+                dataType: "json"
+            }).done(function( data ) {
+
+                if(data.result == "fav"){
+                    link.html('<img src="/img/star_12.svg" class="icon">');
+                
+                }
+                else if(data.result == "del"){
+                    link.html('<img src="/img/like.svg" class="icon">');
+                   
+                }else{
+                    alert('Error');
+                }
+                  
+            }).fail( function() {
+                console.log( 'Error!!' );
+            });
+        });
+    });
+    
+    
+</script>
