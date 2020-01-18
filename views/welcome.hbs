@@ -1,0 +1,47 @@
+ <header>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+        <!-- Slide One - Set the background image for this slide in the line below -->
+        <div class="carousel-item active" style="background-image: url('photo-inner.jpg')">
+            <div class="carousel-caption d-none d-md-block">
+            {{#if logged}}
+            <h4 class="display-4">Welcome {{user}}</h4><br><br>
+            {{/if}}
+            <h3 class="display-4">Spotify Music Index</h3>
+            <p class="lead">Discover the fascinating word of Music</p>
+            </div>
+        </div>
+        </div>
+    </div>
+</header>
+
+<!-- Page Content -->
+<section class="py-5">
+<div class="container">
+    {{#if spotify}}
+    <div class="card-columns">
+        {{#each spotify}}
+        <div class="card">
+            <img class="card-img-top" src="{{images.0.url}}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"><strong>{{name}}</strong></h5>
+                {{#each artists}}
+                <p class="card-text">{{name}}</p>
+                {{/each}}
+                <p class="card-text"><small class="text-muted">Launched {{release_date}}</small></p>
+                <form action="/album" method="GET">
+                    <input type="hidden" name="id" value="{{id}}">
+                    <input type="hidden" name="album" value="{{name}}">
+                    <button type="submit" class="btn btn-info">Info</button>
+                </form>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    {{else}}
+    <h2 class="font-weight-light" align="center" >Playlist Management System</h2> 
+    <h4 align="center">@Powered by Asier Cidon</h4>
+    {{/if}}
+</div>
+</section>
+

@@ -1,0 +1,69 @@
+ <header>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+        <!-- Slide One - Set the background image for this slide in the line below -->
+        <div class="carousel-item active" style="background-image: url('photo-inner.jpg')">
+            <div class="carousel-caption d-none d-md-block">
+            {{#if logged}}
+            <h4 class="display-4">Welcome {{user}}</h4><br><br>
+            {{/if}}
+            <h3 class="display-4">Spotify Music Index</h3>
+            <p class="lead">Discover the fascinating word of Music</p>
+            </div>
+        </div>
+        </div>
+    </div>
+</header>
+
+<!-- Page Content -->
+<section class="py-5">
+<div class="container">
+    {{#if spotify_album}}
+        <div class="alert alert-primary" role="alert" align="center"><strong>{{spotify_album}}</strong></div>
+    {{/if}}
+    {{#if spotify}}
+        {{#each spotify}}
+        <br>
+        <div class="card">
+            <h5 class="card-header">{{name}}</h5>
+            <div class="card-body">
+                <h5 class="card-title">Artists:</h5>
+                {{#each artists}}
+                <span class="badge badge-pill badge-info">{{name}}</span>
+                {{/each}}
+                <br><br>
+                <figure>
+                    <audio
+                        controls
+                        src="{{preview_url}}">
+                            Your browser does not support the
+                            <code>audio</code> element.
+                    </audio>
+                </figure>
+                <br><span class="badge badge-primary">{{track_number}}</span>
+                {{#if favorite}}
+                <iframe name="hiddenFrame" width="0" height="0" border="0" style="display: none;"></iframe>
+                <form action="/users/deletesong" method="POST" target="hiddenFrame">   
+                    <input type="hidden" id="spotify_id" name="spotify_id" value="{{id}}">
+                    <input type="hidden" id="name" name="name" value="{{name}}">
+                    <input type="hidden" id="album" name="album" value="{{../spotify_album}}">
+                    <button type="submit" class="btn btn-danger">Favorite</button>
+                {{else}}
+                <iframe name="hiddenFrameadd" width="0" height="0" border="0" style="display: none;"></iframe>
+                <form action="/users/addsong" method="POST" target="hiddenFrameadd">   
+                    <input type="hidden" id="spotify_id" name="spotify_id" value="{{id}}">
+                    <input type="hidden" id="name" name="name" value="{{name}}">
+                    <input type="hidden" id="album" name="album" value="{{../spotify_album}}">
+                    <button type="submit" class="btn btn-light">Favorite</button>
+                </form>
+                {{/if}}
+            </div>
+        </div>
+        {{/each}}                         
+        {{favoritesongs}}
+    {{else}}
+    <h2 class="font-weight-light">Playlist Management System</h2> 
+    <h4>@Powered by Asier Cidon</h4>
+    {{/if}}
+</div>
+</section>
