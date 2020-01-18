@@ -4,6 +4,7 @@
   "description": "En esta práctica, el objetivo será crear una pequeña app de música, tanto en la parte de front como back.",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +19,8 @@
   "homepage": "https://github.com/villarjimenez00/spotify-app-exercice#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "hbs": "^4.0.6"
+    "express": "^4.17.1",
+    "hbs": "^4.0.6",
+    "nodemon": "^2.0.2"
   }
 }
