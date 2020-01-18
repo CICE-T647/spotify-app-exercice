@@ -1,4 +1,3 @@
-const signup = require("./signup");
-const login = require("./login");
-
-module.exports = { signup, login };
+const home = require("./home");
+const album = require("./album");
+module.exports = { home, album };

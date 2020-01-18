@@ -1,0 +1,33 @@
+<div class="container-fluid">
+  <div class="row">
+    <h1>Home</h1>
+  </div>
+  <div class="row">
+      <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Album</th>
+          <th scope="col">Artistas</th>
+          <th scope="col">Imagen</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+    {{#each albums}}
+        <tr>
+          <td>{{this.name}}</td>
+          <td>
+            <ul>
+              {{#each artists}}
+                 <li>{{this.name}}</li>
+              {{/each}}
+            </ul>
+          </td>
+          <td><img src="{{this.images.0.url}}" alt=""></td>
+          <td><a href="../../album/{{this.id}}" class="btn btn-primary">Ver mas</a></td>
+        </tr>
+      {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
