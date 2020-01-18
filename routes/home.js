@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const getTokenSpotify = require("../spotify-token/getToken");
+const { isAutenticated } = require("../middlewares");
 
-router.get("/", async (req, res) => {
+router.get("/", isAutenticated, async (req, res) => {
   const user = req.user;
   try {
     const url = "https://api.spotify.com/v1/browse/new-releases?country=ES";

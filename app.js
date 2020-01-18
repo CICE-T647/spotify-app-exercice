@@ -5,6 +5,11 @@ const app = Express();
 const mongoose = require("mongoose");
 
 const bodyParser = require("body-parser");
+const passport = require("passport");
+
+//auth strategies
+const { localStrategy, tokenStrategy } = require("./strategies");
+
 const SERVER_PORT = process.env.SERVER_PORT || 5000;
 const DB_PORT = process.env.DB_PORT || 27017;
 
@@ -17,6 +22,11 @@ hbs.registerPartials(__dirname + "/views/partials");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use(passport.initialize());
+
+passport.use(localStrategy);
+passport.use(tokenStrategy);
 
 const { home, album } = require("./routes");
 const { signup, login, logout } = require("./routes/auth");
