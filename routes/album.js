@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const getTokenSpotify = require("../spotify-token/getToken");
+const { isAutenticated } = require("../middlewares");
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", isAutenticated, async (req, res) => {
   try {
     const user = req.user;
     const { id } = req.params;
