@@ -2,13 +2,33 @@
 
 {{album.name}}
 {{album.release_date}}
-
-<ul>
-{{#each album.available_markets}}       
-
-        <h4>{{this}}</h4>      
+<br>
+Artista:
+{{#each album.artists}}
+    {{this.name}}
 
 {{/each}}
+<ul>
+<!-- {{#each album.available_markets}}       
+
+        <h4>{{this}}</h4>   
+          
+
+{{/each}}  -->
+{{!-- 
+{{#each album.images}}       
+
+La imagen
+        <img src={{this.url}} alt=""> 
+          
+
+{{/each}}</each> --}}
+
+
+La primera imagen
+<img src={{album.images.0.url}} alt="">
+
+
 </ul>
 
 {{/if}}
