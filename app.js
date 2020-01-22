@@ -1,22 +1,44 @@
 require("dotenv").config();
+const express = require("express");
+const path = require("path");
+const mongoose = require("mongoose");
+const indexRouter = require("./routes/index");
+const hbs = require("express-handlebars")
+const fileUpload = require("express-fileupload");
+const cors = require("cors");
 
-const Express = require("express");
-const app = Express();
+var app = express();
+app.use(cors());
+require("./passport/config")(app);
 
-const bodyParser = require("body-parser");
-const SERVER_PORT = process.env.SERVER_PORT || 5000;
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "public")));
+app.set("views", path.join("public","views"))
+app.use(fileUpload())
+app.use("/api", indexRouter)
 
-const hbs = require("hbs")
+app.get("/login", (req, res)=>{
+    res.render("login")
+})
 
-app.use(Express.static(__dirname + "/public"))
-app.set("views", __dirname + "/views")
-app.set("view engine", "hbs")
-hbs.registerPartials(__dirname + '/views/partials');
+app.get("/signup", (req, res)=>{
+    res.render("signup")
+})
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-
-app.listen(SERVER_PORT, () => {
-  console.log(`Server listening on port ${SERVER_PORT} `);
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  res.status(404).json({ message: "Not found" });
 });
+
+mongoose
+  .connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0-6pijq.mongodb.net/spotify?retryWrites=true&w=majority`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log("Base de datos conectada"))
+  .catch(() => {
+    throw error;
+  });
+
+module.exports = app;
