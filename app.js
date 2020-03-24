@@ -28,15 +28,10 @@ app.use(passport.initialize());
 passport.use(localStrategy);
 passport.use(tokenStrategy);
 
-const { home, album } = require("./routes");
-const { signup, login, logout } = require("./routes/auth");
-
 //routes
-app.use("/signup", signup);
-app.use("/login", login);
-app.use("/logout", logout);
-app.use("/home", home);
-app.use("/album", album);
+const indexRouter = require("./routes/index");
+app.use("/", indexRouter);
+
 
 mongoose
   .connect(`mongodb://localhost:${DB_PORT}/spotify_appdb`, {
