@@ -39,6 +39,10 @@ router.post("/", (req, res) => {
     // como segundo parámetro, recibe el SECRET también en formato de string. Lo recogemos del archivo .env
     const token = jwt.sign(JSON.stringify(payload), process.env.JWT_SECRET);
 
+    
+    //token en localstorage
+    //localStorage.setItem('token',token);
+    
     //Devolvemos el token al usuario
     res.status(200).json({ data: { token } });
     // Ejecutamos la función pasandole los parametros req y res

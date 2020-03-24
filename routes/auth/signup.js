@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
         .status(409)
         .render(signup, { message: "El usuario ya existe" });
   } catch (error) {
-    res.status(500).json({ message: "Hubo un error" });
+    res.status(500).json({ message: "Hubo un error buscando usuario signup" });
   }
 
   try {
@@ -33,10 +33,10 @@ router.post("/", async (req, res) => {
 
     await user.save();
 
-    //res.json({ user });
-    res.redirect("/login");
+    res.json({ user });
+    //res.redirect("/login");
   } catch (error) {
-    res.status(500).render(signup, { message: "Hubo un error" });
+    res.status(500).render(signup, { message: "Hubo un error guardando usuario signup" });
   }
 });
 

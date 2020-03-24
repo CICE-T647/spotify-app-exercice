@@ -9,6 +9,7 @@ const opts = {
 
 module.exports = new JwtStrategy(opts, async (tokenPayload, next) => {
   console.log(`Estrategia jwt. Información recibida: token ${tokenPayload}`);
+  console.log(`Estrategia jwt. Información recibida: token ${JSON.stringify(tokenPayload)}`);
 
   // El callback de verificación, en este caso, recibe el token en formato json.
   try {
