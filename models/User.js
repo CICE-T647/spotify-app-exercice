@@ -18,6 +18,14 @@ const userSchema = new Schema({
     type: String,
     require: [true, { message: "email is required" }]
   },
+  status: {
+    type: String,
+    enum: ["Pending", "Active"],
+    default: "Pending"
+  },
+  confirmationCode: {
+    type: String
+  },
   password: {
     type: String,
     require: [true, { message: "password is required" }]
