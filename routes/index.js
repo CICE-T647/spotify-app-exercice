@@ -4,7 +4,7 @@ const { isAutenticated, isUserActive } = require("../middlewares");
 
 const home = require("./home");
 const album = require("./album");
-const email = require("./email/sendmail");
+const email = require("./email");
 const { signup, login, logout, confirmUser } = require("./auth");
 
 router.get("/", [isAutenticated, isUserActive], (req, res, next) => {

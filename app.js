@@ -6,9 +6,12 @@ const mongoose = require("mongoose");
 
 const bodyParser = require("body-parser");
 const passport = require("passport");
+const fileUpload = require("express-fileupload");
 
 //auth strategies
 const { localStrategy, tokenStrategy } = require("./strategies");
+
+const indexRouter = require("./routes/index");
 
 const SERVER_PORT = process.env.SERVER_PORT || 5000;
 const DB_PORT = process.env.DB_PORT || 27017;
@@ -28,10 +31,10 @@ app.use(passport.initialize());
 passport.use(localStrategy);
 passport.use(tokenStrategy);
 
-//routes
-const indexRouter = require("./routes/index");
-app.use("/", indexRouter);
+app.use(fileUpload());
 
+//routes
+app.use("/", indexRouter);
 
 mongoose
   .connect(`mongodb://localhost:${DB_PORT}/spotify_appdb`, {

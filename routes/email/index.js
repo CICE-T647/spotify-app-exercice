@@ -1,3 +1,8 @@
-const sendmail = require('./sendmail')
+const express = require("express");
+const router = express.Router();
 
-module.exports={sendmail}
+const sendmail = require("./sendmail");
+
+router.use("/sendmail", sendmail);
+
+module.exports = router;
