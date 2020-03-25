@@ -1,3 +1,4 @@
 const isAutenticated = require("./isautenticated");
+const isUserActive = require("./isUserActive");
 
-module.exports = { isAutenticated };
+module.exports = { isAutenticated, isUserActive };

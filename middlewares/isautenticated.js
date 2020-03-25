@@ -6,9 +6,13 @@ module.exports = (req, res, next) => {
       `Autenticación de estrategia jwt -middleware-. Información recibida: error: ${error}, user: ${user}, info: ${info}`
     );
 
-    if (error) return res.status(500).json({ message: "Hubo un error autenticacion middleware" });
+    if (error)
+      return res
+        .status(500)
+        .json({ message: "Hubo un error autenticacion middleware" });
 
-    if (!user) return res.status(401).json({ message: "No autorizado" });
+    if (!user)
+      return res.status(401).json({ message: "No autorizado middleware" });
 
     req.user = user;
 
