@@ -26,6 +26,9 @@ const userSchema = new Schema({
   confirmationCode: {
     type: String
   },
+  img: {
+    type: String
+  },
   password: {
     type: String,
     require: [true, { message: "password is required" }]

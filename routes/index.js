@@ -5,6 +5,7 @@ const { isAutenticated, isUserActive } = require("../middlewares");
 const home = require("./home");
 const album = require("./album");
 const email = require("./email");
+const upload = require("./upload");
 const { signup, login, logout, confirmUser } = require("./auth");
 
 router.get("/", [isAutenticated, isUserActive], (req, res, next) => {
@@ -19,5 +20,6 @@ router.use("/home", home);
 router.use("/album", album);
 router.use("/email", email);
 router.use("/confirmuser", confirmUser);
+router.use("/image", upload);
 
 module.exports = router;
