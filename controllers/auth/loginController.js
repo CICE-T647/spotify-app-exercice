@@ -1,5 +1,6 @@
 const passport = require("passport");
-const jwt = require("jsonwebtoken");
+
+const tokenGenerator = require("../../lib/tokenGenerator");
 
 module.exports = (req, res) => {
   // procedemos a autenticar la estrategia local
@@ -14,26 +15,7 @@ module.exports = (req, res) => {
     // Si hay info, el error será del cliente, por lo que lo devolvemos con un 400
     if (info) res.status(400).json({ message: info });
 
-    // Procedemos a definir el payload del token.
-    // en el podemos introducir la información establecer para la comunicación implicita entre el cliente y el servidor
-    const payload = {
-      // Declaramos la id de usuario, para poder acceder a ella más tarde(En el punto 4)
-      sub: user._id,
-      // Definimos el tiempo de expiración
-      // !NOTA: Transformamos la variable de entorno a número para poder operar con date.now
-      exp: Date.now() + parseInt(process.env.JWT_EXPIRES),
-
-      //Enviamos información útil adicional
-      username: user.username
-    };
-
-    // Haciendo uso de la librería jsonwentoken generamos el token:
-    // como primer parametro recibe el payload en formato string (por lo que hay que "stringifycarlo")
-    // como segundo parámetro, recibe el SECRET también en formato de string. Lo recogemos del archivo .env
-    const token = jwt.sign(JSON.stringify(payload), process.env.JWT_SECRET);
-
-    //token en localstorage
-    //localStorage.setItem('token',token);
+    const token = tokenGenerator(user._id, user.username);
 
     //Devolvemos el token al usuario
     res.status(200).json({ data: { token } });
