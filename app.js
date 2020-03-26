@@ -9,7 +9,11 @@ const passport = require("passport");
 const fileUpload = require("express-fileupload");
 
 //auth strategies
-const { localStrategy, tokenStrategy } = require("./strategies");
+const {
+  localStrategy,
+  tokenStrategy,
+  gitLabStrategy
+} = require("./strategies");
 
 const indexRouter = require("./routes/index");
 
@@ -28,7 +32,12 @@ app.use(bodyParser.json());
 
 app.use(passport.initialize());
 
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
 passport.use(localStrategy);
+passport.use(gitLabStrategy);
 passport.use(tokenStrategy);
 
 app.use(fileUpload());

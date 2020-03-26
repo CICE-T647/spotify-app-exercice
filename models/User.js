@@ -32,7 +32,9 @@ const userSchema = new Schema({
   password: {
     type: String,
     require: [true, { message: "password is required" }]
-  }
+  },
+  platform: { type: String, default: null },
+  socialId: { type: String, default: null }
 });
 
 const User = mongoose.model("User", userSchema);
