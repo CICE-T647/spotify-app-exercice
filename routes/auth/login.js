@@ -16,9 +16,24 @@ router.get("/spotify", (req, res) => {
   res.send("auth/login spotify pendiente de oauth");
 });
 
-router.get("/google", (req, res) => {
-  res.send("auth/login google pendiente de oauth");
-});
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", { failureRedirect: "/login" }),
+  (req, res) => {
+    if (req.user) {
+      const token = tokenGenerator(req.user._id, req.user.username);
+
+      return res.json({ title: "Google Signin", token });
+    }
+
+    res.send("algo ha ido mal");
+  }
+);
 
 router.get(
   "/gitlab",

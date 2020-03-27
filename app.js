@@ -12,7 +12,8 @@ const fileUpload = require("express-fileupload");
 const {
   localStrategy,
   tokenStrategy,
-  gitLabStrategy
+  gitLabStrategy,
+  googleStrategy
 } = require("./strategies");
 
 const indexRouter = require("./routes/index");
@@ -38,6 +39,7 @@ passport.serializeUser(function(user, done) {
 
 passport.use(localStrategy);
 passport.use(gitLabStrategy);
+passport.use(googleStrategy);
 passport.use(tokenStrategy);
 
 app.use(fileUpload());
