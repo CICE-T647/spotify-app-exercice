@@ -31,7 +31,7 @@ router.get(
   )
 );
 router.get(
-  "/callback/gitlab",
+  "/gitlab/callback",
   passport.authenticate("gitlab", { failureRedirect: "/login" }),
   (req, res) => {
     if (req.user) {
