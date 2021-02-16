@@ -1,0 +1,23 @@
+<div class="container-fluid">
+  <div class="row">
+    <h1>{{data.name}}</h1>
+  </div>
+  <div class="row">
+    <ul>
+        {{#each tracks}}
+        <li>
+            <span>
+                {{this.name}}--
+            </span>
+            <audio controls>
+                <source src="{{this.external_urls.spotify}}" type="audio/ogg">
+                <source src="{{this.external_urls.spotify}}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            
+            
+        </li>
+        {{/each}}    
+    </ul>
+  </div>
+</div>
